@@ -20,13 +20,16 @@ import {
   MatToolbarModule } from '@angular/material';
 import { MenuComponent } from './menu/menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { NovoColaboradorComponent } from './novo-colaborador/novo-colaborador.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ColaboradoresComponent,
     SetoresComponent,
-    MenuComponent
+    MenuComponent,
+    NovoColaboradorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,  
     MatTableModule,
     MatToolbarModule,
-    LayoutModule
+    LayoutModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

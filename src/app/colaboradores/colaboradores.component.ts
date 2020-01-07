@@ -20,7 +20,6 @@ export class ColaboradoresComponent implements OnInit {
   getColaboradores() {
     return this.colaboradoresService.getColaboradores().subscribe(res => {
         this.colaboradores = res;
-        console.log(this.colaboradores);
       });  
   }
 
