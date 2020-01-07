@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColaboradoresComponent implements OnInit {
 
-  colaboradores: Colaborador[] = [];
+  colaboradores: Colaborador[];
 
   constructor(private colaboradoresService: ColaboradoresService) { }
 
@@ -18,7 +18,14 @@ export class ColaboradoresComponent implements OnInit {
   }
 
   getColaboradores() {
-    return this.colaboradoresService.getColaboradores().subscribe(res => this.colaboradores = res);
+    return this.colaboradoresService.getColaboradores().subscribe(res => {
+        this.colaboradores = res;
+        console.log(this.colaboradores);
+      });  
+  }
+
+  getColaboradorById(id: number) {
+    return null;
   }
 
 
