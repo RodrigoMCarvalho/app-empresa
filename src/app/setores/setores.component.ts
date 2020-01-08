@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetoresComponent implements OnInit {
 
+  selected = 'option2';
+
   setores: Setor[] =[];
 
   constructor(private setoresService: SetoresService) { }

@@ -1,8 +1,12 @@
 import { Colaborador } from './colaborador.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 const apiUrl = 'http://localhost:8080/v1';
 
@@ -30,6 +34,16 @@ export class ColaboradoresService {
           )
         );
   }
+
+  addColaborador(colaborador) {
+    return this.http.post<Colaborador>(`${apiUrl}/colaborador`, colaborador, httpOptions)
+      .pipe(
+        tap((colaborador: Colaborador) => console.log(`adicionou o colaborador com w/ id=${colaborador.id}`)),
+          catchError(this.handleError<Colaborador>('addColaborador')
+          )
+        );
+  }
+  
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

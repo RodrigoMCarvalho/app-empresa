@@ -2,25 +2,35 @@
     <h3>Adicionar Novo Colaborador</h3>
 </div>
 
-  <form class="example-container" [formGroup]="colaboradorForm" (ngSubmit)="addColaborador(productForm.value)">
+  <form class="example-container" [formGroup]="colaboradorForm" (ngSubmit)="addColaborador(colaboradorForm.value)">
 
     <mat-form-field>
       <input matInput name="nome" placeholder="Nome" formControlName="nome">
     </mat-form-field>
+
     <mat-form-field>
       <input  matInput name="cpf" placeholder="CPF" formControlName="cpf">
     </mat-form-field>
+
     <mat-form-field>
       <input matInput name="email" placeholder="Email" formControlName="email">
     </mat-form-field>
+
     <mat-form-field>
         <input matInput name="idade" placeholder="Idade" formControlName="idade">
-      </mat-form-field>
-    <mat-select placeholder="Setor">
-        <mat-option value="option">Setor</mat-option>
-    </mat-select>
-  
-    <button type="submit" [disabled]="!colaboradorForm.valid" mat-button color="primary" >Adicionar</button>
-  </form>
+    </mat-form-field>
 
- 
+    <mat-form-field>
+        <input matInput name="telefone" placeholder="Telefone" formControlName="telefone">
+    </mat-form-field>
+
+    <mat-form-field>
+    <mat-label>Setor</mat-label>
+        <mat-select formControlName="setor">
+            <mat-option *ngFor="let setor of setores" [value]="setor">{{ setor.descricao }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button type="submit" [disabled]="!colaboradorForm.valid"  mat-button color="primary" >Adicionar</button>
+
+  </form>
