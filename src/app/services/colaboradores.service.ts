@@ -1,4 +1,5 @@
-import { Colaborador } from './colaborador.model';
+import { ColaboradorPage } from '../models/colaboradorPage.model';
+import { Colaborador } from '../models/colaborador.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -24,6 +25,16 @@ export class ColaboradoresService {
         catchError(this.handleError<Colaborador[]>(`getColaboradores `)
         )
       );
+  }
+  
+  getColaboradoresPage(page: number): Observable<ColaboradorPage>{
+    return this.http.get<ColaboradorPage>(`${apiUrl}/colaboradores?page=${page}&size=8`)
+    .pipe(
+      map(response => {
+        const data = response;
+        console.log(data.content);
+        return data ;
+      }));
   }
 
   getColaboradorById(id: number) {

@@ -1,16 +1,16 @@
-import { SetoresService } from './../setores/setores.service';
-import { ColaboradoresService } from './../colaboradores/colaboradores.service';
+import { SetoresService } from '../services/setores.service';
+import { ColaboradoresService } from '../services/colaboradores.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Setor } from '../setores/setor.model';
+import { Setor } from '../models/setor.model';
 
 @Component({
   selector: 'app-novo-colaborador',
-  templateUrl: './novo-colaborador.component.html',
-  styleUrls: ['./novo-colaborador.component.scss']
+  templateUrl: './colaborador-novo.component.html',
+  styleUrls: ['./colaborador-novo.component.scss']
 })
-export class NovoColaboradorComponent implements OnInit {
+export class ColaboradorNovoComponent implements OnInit {
 
   colaboradorForm: FormGroup;
   

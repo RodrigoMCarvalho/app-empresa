@@ -1,5 +1,6 @@
-import { ColaboradoresService } from './colaboradores.service';
-import { Colaborador } from './colaborador.model';
+import { ColaboradorPage } from '../models/colaboradorPage.model';
+import { ColaboradoresService } from '../services/colaboradores.service';
+import { Colaborador } from '../models/colaborador.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
@@ -10,6 +11,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class ColaboradoresComponent implements OnInit {
 
   colaboradores: Colaborador[];
+  colaborador: Colaborador;
+  pageColaborador : ColaboradorPage ;
+  selectedPage : number = 0;
 
   constructor(private colaboradoresService: ColaboradoresService) { }
 
@@ -23,8 +27,21 @@ export class ColaboradoresComponent implements OnInit {
       });  
   }
 
+  getColaboradorPage(page:number): void {
+    this.colaboradoresService.getColaboradoresPage(page)
+        .subscribe(page => this.pageColaborador = page)
+  }
+
+  nSelect(page: number): void {
+    console.log("Página selecionada: " + page);
+    this.selectedPage=page;
+    this.getColaboradorPage(page);
+  }
+
   getColaboradorById(id: number) {
-    return null;
+    return this.colaboradoresService.getColaboradorById(id).subscribe(res => {
+      this.colaborador = res;
+    });
   }
 
 

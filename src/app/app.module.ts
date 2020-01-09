@@ -20,7 +20,7 @@ import {
   MatToolbarModule } from '@angular/material';
 import { MenuComponent } from './menu/menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { NovoColaboradorComponent } from './novo-colaborador/novo-colaborador.component';
+import { ColaboradorNovoComponent } from './colaborador-novo/colaborador-novo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ColaboradoresComponent,
     SetoresComponent,
     MenuComponent,
-    NovoColaboradorComponent
+    ColaboradorNovoComponent
   ],
   imports: [
     BrowserModule,

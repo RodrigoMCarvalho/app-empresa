@@ -1,12 +1,11 @@
 import { Observable } from 'rxjs';
-import { Setor } from './setor.model';
-import { SetoresService } from './setores.service';
+import { Setor } from '../models/setor.model';
+import { SetoresService } from '../services/setores.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-setores',
-  templateUrl: './setores.component.html',
-  styleUrls: ['./setores.component.scss']
+  templateUrl: './setores.component.html'
 })
 export class SetoresComponent implements OnInit {
 

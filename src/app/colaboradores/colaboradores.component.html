@@ -20,4 +20,10 @@
             <td>{{ col?.idade }}</td>
       </tr>
     </tbody>
+    <nav aria-label="...">
+      <ul style="margin-left: 180px;margin-top:-10px;" class="pagination"  *ngIf="!pageColaborador?.content" >
+        <li *ngFor="let page of ' '.repeat(pageColaborador?.totalPages).split(''), let i = index " (click)="onSelect(i)" [class.active]="i === selectedPage" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+      </ul>
+    </nav>
 </table>
+

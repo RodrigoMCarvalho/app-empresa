@@ -1,4 +1,4 @@
-import { Colaborador } from './../colaboradores/colaborador.model';
+import { Colaborador } from './colaborador.model';
 
 export class Setor {
     id: string;
