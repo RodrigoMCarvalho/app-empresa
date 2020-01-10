@@ -22,6 +22,7 @@ import { MenuComponent } from './menu/menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ColaboradorNovoComponent } from './colaborador-novo/colaborador-novo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ColaboradorDetalhesComponent } from './colaborador-detalhes/colaborador-detalhes.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ColaboradoresComponent,
     SetoresComponent,
     MenuComponent,
-    ColaboradorNovoComponent
+    ColaboradorNovoComponent,
+    ColaboradorDetalhesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
+import { Colaborador } from './../models/colaborador.model';
 import { ColaboradorPage } from '../models/colaboradorPage.model';
-import { Colaborador } from '../models/colaborador.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -40,7 +40,7 @@ export class ColaboradoresService {
   getColaboradorById(id: number) {
     return this.http.get<Colaborador>(`${apiUrl}/colaborador/${id}`)
       .pipe(
-        tap(_ => console.log(`leu o produto id=${id}`)),
+        tap(_ => console.log(`leu o colaborador id=${id}`)),
           catchError(this.handleError<Colaborador>(`getColaboradorById id=${id}`)
           )
         );
@@ -53,6 +53,16 @@ export class ColaboradoresService {
           catchError(this.handleError<Colaborador>('addColaborador')
           )
         );
+  }
+
+  updateColaborador(id, colaborador) {
+    const url = `${apiUrl}/colaborador/${id}`
+    return this.http.put<Colaborador>(url, colaborador, httpOptions)
+      .pipe(
+        tap((colaborador: Colaborador) => console.log(`atualizou o colaborador com w/ id=${colaborador.id}`)),
+        catchError(this.handleError<Colaborador>('updateColaborador')
+        )
+      );
   }
   
 
