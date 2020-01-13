@@ -3,11 +3,15 @@
 </div>
 
   <form class="example-container" [formGroup]="colaboradorEditForm" (ngSubmit)="updateColaborador(colaboradorEditForm.value)">
-
-    <mat-form-field>
-      <input matInput name="nome" placeholder="Nome" formControlName="nome">
+    
+    <mat-form-field hidden>
+      <input matInput name="id" placeholder="id" formControlName="id">
     </mat-form-field>
     
+    <mat-form-field >
+      <input matInput name="nome" placeholder="Nome" formControlName="nome">
+    </mat-form-field>
+
     <mat-form-field>
       <input  matInput name="cpf" placeholder="CPF" formControlName="cpf">
     </mat-form-field>
@@ -24,14 +28,8 @@
         <input matInput name="telefone" placeholder="Telefone" formControlName="telefone">
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Setor</mat-label>
-          <mat-select formControlName="setor">
-              <mat-option *ngFor="let setor of setores" [value]="setor">{{ setor.descricao }}</mat-option>
-          </mat-select>
-      </mat-form-field>
 
-    <button type="submit" [disabled]="!colaboradorEditForm.valid"  mat-button color="primary" >Adicionar</button>
+    <button type="submit" [disabled]="!colaboradorEditForm.valid"  mat-button color="primary">Editar</button>
 
   </form>
 

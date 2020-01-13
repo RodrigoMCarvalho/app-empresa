@@ -16,6 +16,13 @@ export class ColaboradorEditarComponent implements OnInit {
   colaborador: Colaborador;
   isLoadingResults = false;
   setores: Setor[];
+  id: string = '';
+  nome: string = '';
+  cpf: string = '';
+  email: string ='';
+  idade: number = null;
+  telefone: string = '';
+  setor: Setor[];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -27,12 +34,12 @@ export class ColaboradorEditarComponent implements OnInit {
     this.getColaborador(this.route.snapshot.params['id']);
   
     this.colaboradorEditForm = this.formBuilder.group({
+      'id'       : [null],
       'nome'     : [null, [Validators.required, Validators.minLength(3)]],
       'cpf'      : [null, Validators.required],
       'email'    : [null, [Validators.required, Validators.email]],
       'idade'    : [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-      'telefone' : [null, Validators.required],
-      'setor'    : [null, Validators.required]
+      'telefone' : [null, Validators.required]
      });
 
      this.setoresService.getSetores().subscribe(res => this.setores = res)
@@ -42,21 +49,27 @@ export class ColaboradorEditarComponent implements OnInit {
     this.colaboradorService.getColaboradorById(id)
         .subscribe( data => {
           this.colaborador = data
-          console.log(this.colaborador);
           this.isLoadingResults = false;
-        });
-      console.log(this.colaborador) 
+          this.colaboradorEditForm.setValue({
+            id: data.id,
+            nome: data.nome,
+            cpf: data.cpf,
+            email: data.email,
+            idade: data.idade,
+            telefone: data.telefone
+          })
+        }); 
+    
   }
-
-
-  updateColaborador(form: NgForm) {
+  //form: NgForm
+  updateColaborador(colaborador: Colaborador) {
+    //console.log(colaborador)
     this.isLoadingResults = true;
-    this.colaboradorService.updateColaborador(this.colaborador.id, form).subscribe( res => {
+    this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
       this.isLoadingResults = false;
-      this.router.navigate([`/colaborador-detalhe/` + this.colaborador.id]);
+      this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
     }, (err) => {
       console.log(err);
-      this.isLoadingResults = false;
     });
   }
 

@@ -58,9 +58,8 @@ export class ColaboradoresService {
         );
   }
 
-  updateColaborador(id, colaborador) {
-    const url = `${this.apiUrl}/colaborador/${id}`
-    return this.http.put<Colaborador>(url, colaborador, httpOptions)
+  updateColaborador(colaborador) {
+    return this.http.put<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
       .pipe(
         tap((colaborador: Colaborador) => console.log(`atualizou o colaborador com w/ id=${colaborador.id}`)),
         catchError(this.handleError<Colaborador>('updateColaborador')
