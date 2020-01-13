@@ -6,8 +6,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-colaborador-editar',
-  templateUrl: './colaborador-editar.component.html',
-  styleUrls: ['./colaborador-editar.component.scss']
+  templateUrl: './colaborador-editar.component.html'
 })
 export class ColaboradorEditarComponent implements OnInit {
   
