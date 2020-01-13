@@ -20,11 +20,10 @@
           <dd>{{ colaborador?.telefone }}</dd>
           <dt>Idade:</dt>
           <dd>{{ colaborador?.idade }}</dd>
-          
         </dl>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-flat-button color="primary" class="teste" [routerLink]="['/colaborador-editar']"><mat-icon>edit</mat-icon> Editar</button>
+        <button class="line-spacing" mat-flat-button color="primary" [routerLink]="['/colaborador-editar', colaborador?.id]" (click)="edit(colaborador?.id)"><mat-icon>edit</mat-icon> Editar</button>
         <button mat-flat-button color="warn" ><mat-icon>delete</mat-icon>Excluir</button>
       </mat-card-actions>
     </mat-card>

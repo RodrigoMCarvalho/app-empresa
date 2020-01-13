@@ -1,3 +1,5 @@
+import { SetoresService } from './../services/setores.service';
+import { Setor } from './../models/setor.model';
 import { Colaborador } from './../models/colaborador.model';
 import { ColaboradoresService } from './../services/colaboradores.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,18 +12,21 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 })
 export class ColaboradorEditarComponent implements OnInit {
   
-  colaboradorForm: FormGroup;
-  formBuilder:FormBuilder;
+  colaboradorEditForm: FormGroup;
   colaborador: Colaborador;
   isLoadingResults = false;
+  setores: Setor[];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private colaboradorService: ColaboradoresService) { }
+              private formBuilder:FormBuilder,
+              private colaboradorService: ColaboradoresService,
+              private setoresService: SetoresService) { }
 
   ngOnInit() {
-    this.colaboradorService.getColaboradorById(this.route.snapshot['id']);
-    this.colaboradorForm = this.formBuilder.group({
+    this.getColaborador(this.route.snapshot.params['id']);
+  
+    this.colaboradorEditForm = this.formBuilder.group({
       'nome'     : [null, [Validators.required, Validators.minLength(3)]],
       'cpf'      : [null, Validators.required],
       'email'    : [null, [Validators.required, Validators.email]],
@@ -29,13 +34,20 @@ export class ColaboradorEditarComponent implements OnInit {
       'telefone' : [null, Validators.required],
       'setor'    : [null, Validators.required]
      });
+
+     this.setoresService.getSetores().subscribe(res => this.setores = res)
   }
 
-  getColaboradoresById(id) {
-    this.colaboradorService.getColaboradorById(id).subscribe(res => {
-      this.colaborador = res
-    })
+  getColaborador(id) {
+    this.colaboradorService.getColaboradorById(id)
+        .subscribe( data => {
+          this.colaborador = data
+          console.log(this.colaborador);
+          this.isLoadingResults = false;
+        });
+      console.log(this.colaborador) 
   }
+
 
   updateColaborador(form: NgForm) {
     this.isLoadingResults = true;

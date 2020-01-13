@@ -4,22 +4,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { environment } from '../environment/environments';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
-const apiUrl = 'http://localhost:8080/v1';
+}; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColaboradoresService {
 
-  constructor(private http: HttpClient) { }
+  apiUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
+   }
 
   getColaboradores() {
-    return this.http.get<Colaborador[]>(`${apiUrl}/colaboradores/all`)
+    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores/all`)
     .pipe(
       tap(_ => console.log(`leu os colaboradores`)),
         catchError(this.handleError<Colaborador[]>(`getColaboradores `)
@@ -28,7 +31,7 @@ export class ColaboradoresService {
   }
   
   getColaboradoresPage(page: number): Observable<ColaboradorPage>{
-    return this.http.get<ColaboradorPage>(`${apiUrl}/colaboradores?page=${page}&size=8`)
+    return this.http.get<ColaboradorPage>(`${this.apiUrl}/colaboradores?page=${page}&size=8`)
     .pipe(
       map(response => {
         const data = response;
@@ -38,7 +41,7 @@ export class ColaboradoresService {
   }
 
   getColaboradorById(id: number) {
-    return this.http.get<Colaborador>(`${apiUrl}/colaborador/${id}`)
+    return this.http.get<Colaborador>(`${this.apiUrl}/colaborador/${id}`)
       .pipe(
         tap(_ => console.log(`leu o colaborador id=${id}`)),
           catchError(this.handleError<Colaborador>(`getColaboradorById id=${id}`)
@@ -47,7 +50,7 @@ export class ColaboradoresService {
   }
 
   addColaborador(colaborador) {
-    return this.http.post<Colaborador>(`${apiUrl}/colaborador`, colaborador, httpOptions)
+    return this.http.post<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
       .pipe(
         tap((colaborador: Colaborador) => console.log(`adicionou o colaborador com w/ id=${colaborador.id}`)),
           catchError(this.handleError<Colaborador>('addColaborador')
@@ -56,7 +59,7 @@ export class ColaboradoresService {
   }
 
   updateColaborador(id, colaborador) {
-    const url = `${apiUrl}/colaborador/${id}`
+    const url = `${this.apiUrl}/colaborador/${id}`
     return this.http.put<Colaborador>(url, colaborador, httpOptions)
       .pipe(
         tap((colaborador: Colaborador) => console.log(`atualizou o colaborador com w/ id=${colaborador.id}`)),

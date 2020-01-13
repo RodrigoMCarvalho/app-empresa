@@ -3,23 +3,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { environment } from '../environment/environments';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'})
 };
-
-const apiUrl = 'http://localhost:8080/v1';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SetoresService {
 
+  apiUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
+   }
 
   getSetores() {
-    return this.http.get<Setor[]>(`${apiUrl}/setores/todos`)
+    return this.http.get<Setor[]>(`${this.apiUrl}/setores/todos`)
     .pipe(
       tap(_ => console.log(`leu os setores`)),
         catchError(this.handleError<Setor[]>(`getSetores`)
