@@ -45,8 +45,8 @@ export class ColaboradoresService {
       .pipe(
         tap(_ => console.log(`leu o colaborador id=${id}`)),
           catchError(this.handleError<Colaborador>(`getColaboradorById id=${id}`)
-          )
-        );
+        )
+      );
   }
 
   addColaborador(colaborador) {
@@ -54,15 +54,15 @@ export class ColaboradoresService {
       .pipe(
         tap((colaborador: Colaborador) => console.log(`adicionou o colaborador com w/ id=${colaborador.id}`)),
           catchError(this.handleError<Colaborador>('addColaborador')
-          )
-        );
+        )
+      );
   }
 
   updateColaborador(colaborador) {
     return this.http.put<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
       .pipe(
         tap((colaborador: Colaborador) => console.log(`atualizou o colaborador com w/ id=${colaborador.id}`)),
-        catchError(this.handleError<Colaborador>('updateColaborador')
+          catchError(this.handleError<Colaborador>('updateColaborador')
         )
       );
   }
@@ -71,12 +71,11 @@ export class ColaboradoresService {
     return this.http.delete<Colaborador>(`${this.apiUrl}/colaborador/${id}`)
       .pipe(
         tap(_ => console.log('Colaborador removido com sucesso')),
-        catchError(this.handleError<Colaborador>('updateColaborador')
+          catchError(this.handleError<Colaborador>('delete')
         )
       );
   }
   
-
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

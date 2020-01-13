@@ -1,9 +1,8 @@
 <div>
     <h3>Adicionar Novo Colaborador</h3>
 </div>
-
   <form class="example-container" [formGroup]="colaboradorForm" (ngSubmit)="addColaborador(colaboradorForm.value)">
-
+    
     <mat-form-field>
       <input matInput name="nome" placeholder="Nome" formControlName="nome">
     </mat-form-field>
@@ -34,4 +33,3 @@
     <button type="submit" [disabled]="!colaboradorForm.valid"  mat-button color="primary" >Adicionar</button>
 
   </form>
-

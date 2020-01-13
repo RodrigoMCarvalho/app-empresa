@@ -21,7 +21,7 @@ export class SetoresService {
    }
 
   getSetores() {
-    return this.http.get<Setor[]>(`${this.apiUrl}/setores/todos`)
+    return this.http.get<Setor[]>(`${this.apiUrl}/setores`)
     .pipe(
       tap(_ => console.log(`leu os setores`)),
         catchError(this.handleError<Setor[]>(`getSetores`)
