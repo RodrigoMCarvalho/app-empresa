@@ -34,4 +34,14 @@ export class ColaboradorDetalhesComponent implements OnInit {
       console.log(this.colaborador) 
   }
 
+  delete(id) {
+    this.isLoadingResults = true;
+    this.colaboradorService.delete(id).subscribe(res => {
+      this.isLoadingResults = false;
+      this.router.navigate(['colaboradores'])
+    }, (err) => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+  }
 }

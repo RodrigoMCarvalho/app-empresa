@@ -66,6 +66,15 @@ export class ColaboradoresService {
         )
       );
   }
+
+  delete(id) {
+    return this.http.delete<Colaborador>(`${this.apiUrl}/colaborador/${id}`)
+      .pipe(
+        tap(_ => console.log('Colaborador removido com sucesso')),
+        catchError(this.handleError<Colaborador>('updateColaborador')
+        )
+      );
+  }
   
 
   private handleError<T> (operation = 'operation', result?: T) {
