@@ -24,6 +24,7 @@ import { ColaboradorNovoComponent } from './colaborador-novo/colaborador-novo.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColaboradorDetalhesComponent } from './colaborador-detalhes/colaborador-detalhes.component';
 import { ColaboradorEditarComponent } from './colaborador-editar/colaborador-editar.component';
+import { SetorDetalhesComponent } from './setor-detalhes/setor-detalhes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ColaboradorEditarComponent } from './colaborador-editar/colaborador-edi
     MenuComponent,
     ColaboradorNovoComponent,
     ColaboradorDetalhesComponent,
-    ColaboradorEditarComponent
+    ColaboradorEditarComponent,
+    SetorDetalhesComponent
   ],
   imports: [
     BrowserModule,

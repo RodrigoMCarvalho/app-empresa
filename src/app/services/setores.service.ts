@@ -29,6 +29,15 @@ export class SetoresService {
       );
   }
 
+  getSetoresById(id) {
+    return this.http.get<Setor>(`${this.apiUrl}/setores/${id}`)
+    .pipe(
+      tap((setor: Setor) => console.log(`buscou o setor com w/ id=${setor.id}`)),
+        catchError(this.handleError<Setor>(`getSetoresById`)
+      )   
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

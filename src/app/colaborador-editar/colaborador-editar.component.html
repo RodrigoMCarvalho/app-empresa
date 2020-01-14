@@ -29,6 +29,15 @@
     </mat-form-field>
 
 
+
+    <mat-form-field>
+      <mat-label>Setor</mat-label>
+          <mat-select formControlName="setor">
+              <mat-option *ngFor="let setor of setores" [value]="setor">{{ setor.descricao }}</mat-option>
+          </mat-select>
+    </mat-form-field>
+
+
     <button type="submit" [disabled]="!colaboradorEditForm.valid"  mat-button color="primary">Editar</button>
 
   </form>

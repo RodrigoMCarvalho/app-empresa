@@ -1,0 +1,24 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+      <button mat-flat-button color="accent" [routerLink]="['/setores']"><mat-icon>list</mat-icon> Voltar</button>
+    </div>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h4>Colaboradores do setor: {{ setor?.descricao }}</h4></mat-card-title>
+      </mat-card-header>
+      <div *ngFor="let col of colaboradoresPorSetor">
+      <mat-card-content >
+        <dl>
+          <dt>{{ col?.nome }}</dt>
+          <dd>{{ col?.email }}</dd>
+        </dl>
+      </mat-card-content>
+    </div>
+    </mat-card>
+
+  </div>
+

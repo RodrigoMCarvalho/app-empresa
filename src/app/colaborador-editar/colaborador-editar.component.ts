@@ -39,7 +39,8 @@ export class ColaboradorEditarComponent implements OnInit {
       'cpf'      : [null, Validators.required],
       'email'    : [null, [Validators.required, Validators.email]],
       'idade'    : [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-      'telefone' : [null, Validators.required]
+      'telefone' : [null, Validators.required],
+      'setor'    : [null, Validators.required] 
      });
 
      this.setoresService.getSetores().subscribe(res => this.setores = res)
@@ -56,14 +57,15 @@ export class ColaboradorEditarComponent implements OnInit {
             cpf: data.cpf,
             email: data.email,
             idade: data.idade,
-            telefone: data.telefone
+            telefone: data.telefone,
+            setor: data.setor.descricao
           })
         }); 
     
   }
   //form: NgForm
   updateColaborador(colaborador: Colaborador) {
-    //console.log(colaborador)
+    console.log(colaborador)
     this.isLoadingResults = true;
     this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
       this.isLoadingResults = false;

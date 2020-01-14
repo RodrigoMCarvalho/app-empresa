@@ -6,8 +6,9 @@
         <th scope="col">Nome</th>
         <th scope="col">CPF</th>
         <th scope="col">Email</th>
-        <th scope="col">Telefone</th>
         <th scope="col">Idade</th>
+        <th scope="col">Telefone</th>      
+        <th scope="col">Setor</th>      
         <th scope="col">Ações</th>
       </tr>
     </thead>
@@ -17,9 +18,9 @@
             <td>{{ col?.nome }}</td>
             <td>{{ col?.cpf }}</td>
             <td>{{ col?.email }}</td>
-            <td>{{ col?.telefone }}</td>
             <td>{{ col?.idade }}</td>
-
+            <td>{{ col?.telefone }}</td>
+            <td>{{ col?.setor.descricao }}</td>
             <td ><button mat-flat-button color="accent" routerLink="/colaborador-detalhes/{{col.id}}" selected>Detalhes</button></td>
       </tr>
     </tbody>

@@ -11,7 +11,7 @@
       <tr *ngFor="let setor of setores">
         <td>{{ setor?.id }}</td>
         <td>{{ setor?.descricao }}</td>
-        <td ><button mat-flat-button color="accent">Detalhes</button></td>
+        <td ><button mat-flat-button color="accent" routerLink="/setor-detalhes/{{ setor?.id }}" selected>Detalhes</button></td>
       </tr>
     </tbody>
 </table>

@@ -49,6 +49,14 @@ export class ColaboradoresService {
       );
   }
 
+  getColaboradoresBySetor(id: number) {
+    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores/setor/${id}`)
+      .pipe(
+          catchError(this.handleError<Colaborador[]>(`getColaboradoresBySetor`)
+        )
+      );
+  }
+
   addColaborador(colaborador) {
     return this.http.post<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
       .pipe(
