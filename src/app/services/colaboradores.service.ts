@@ -40,7 +40,7 @@ export class ColaboradoresService {
       }));
   }
 
-  getColaboradorById(id: number) {
+  getColaboradorById(id) {
     return this.http.get<Colaborador>(`${this.apiUrl}/colaborador/${id}`)
       .pipe(
         tap(_ => console.log(`leu o colaborador id=${id}`)),

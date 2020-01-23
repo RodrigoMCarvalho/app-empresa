@@ -46,4 +46,5 @@ export class SetorDetalhesComponent implements OnInit {
         });
   }
 
+
 }

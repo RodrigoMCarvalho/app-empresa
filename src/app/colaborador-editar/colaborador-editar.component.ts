@@ -23,6 +23,7 @@ export class ColaboradorEditarComponent implements OnInit {
   idade: number = null;
   telefone: string = '';
   setor: Setor[];
+  compareByValue = true;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -58,7 +59,7 @@ export class ColaboradorEditarComponent implements OnInit {
             email: data.email,
             idade: data.idade,
             telefone: data.telefone,
-            setor: data.setor.descricao
+            setor: data.setor             //seta o objecto setor
           })
         }); 
     
@@ -66,14 +67,15 @@ export class ColaboradorEditarComponent implements OnInit {
   //form: NgForm
   updateColaborador(colaborador: Colaborador) {
     console.log(colaborador)
-    this.isLoadingResults = true;
     this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
-      this.isLoadingResults = false;
       this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
     }, (err) => {
       console.log(err);
     });
   }
 
+  compareSetor(s1: Setor, s2: Setor): boolean {
+    return s1 && s2 ? (s1.id === s2.id && s1.descricao === s2.descricao) : s1 === s2;
+  }
 
 }
