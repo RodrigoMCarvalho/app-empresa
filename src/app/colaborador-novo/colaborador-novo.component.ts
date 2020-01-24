@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Setor } from '../models/setor.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-novo-colaborador',
@@ -40,6 +41,12 @@ export class ColaboradorNovoComponent implements OnInit {
     console.log(form);
     this.colaboradorService.addColaborador(form).subscribe(res => {
         this.route.navigate(['/colaboradores'])
+        Swal.fire({
+          icon: 'success',
+          title: 'Colaborador salvo com sucesso!',
+          showConfirmButton: false,
+          timer: 2500
+        })
     }, (err) => {
       console.log(err);
     });

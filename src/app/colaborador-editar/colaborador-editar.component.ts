@@ -5,6 +5,7 @@ import { ColaboradoresService } from './../services/colaboradores.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-colaborador-editar',
@@ -59,7 +60,7 @@ export class ColaboradorEditarComponent implements OnInit {
             email: data.email,
             idade: data.idade,
             telefone: data.telefone,
-            setor: data.setor             //seta o objecto setor
+            setor: data.setor             //seta o objeto setor
           })
         }); 
     
@@ -69,6 +70,12 @@ export class ColaboradorEditarComponent implements OnInit {
     console.log(colaborador)
     this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
       this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
+      Swal.fire({
+        icon: 'success',
+        title: 'Colaborador alterado com sucesso!',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }, (err) => {
       console.log(err);
     });
