@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { SetoresService } from './../services/setores.service';
 import { Setor } from './../models/setor.model';
 import { Colaborador } from './../models/colaborador.model';
@@ -69,20 +70,34 @@ export class ColaboradorEditarComponent implements OnInit {
   updateColaborador(colaborador: Colaborador) {
     console.log(colaborador)
     this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
-      this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
-      Swal.fire({
-        icon: 'success',
-        title: 'Colaborador alterado com sucesso!',
-        showConfirmButton: false,
-        timer: 2500
-      })
-    }, (err) => {
+      this.mensagemSucesso();
+    }, (err: HttpErrorResponse) => {
+      if (err.status != 200) {
+        Swal.fire({
+          icon: 'error',
+          title: `${err.error.fieldMessage}`,
+          showConfirmButton: false,
+          timer: 2500
+        })
+      } else {
+        this.mensagemSucesso();
       console.log(err);
+      }
     });
   }
 
   compareSetor(s1: Setor, s2: Setor): boolean {
     return s1 && s2 ? (s1.id === s2.id && s1.descricao === s2.descricao) : s1 === s2;
+  }
+
+  mensagemSucesso() {
+    this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
+        Swal.fire({
+          icon: 'success',
+          title: 'Colaborador alterado com sucesso!',
+          showConfirmButton: false,
+          timer: 2500
+        })
   }
 
 }

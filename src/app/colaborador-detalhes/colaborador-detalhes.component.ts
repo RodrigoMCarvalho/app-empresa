@@ -36,7 +36,7 @@ export class ColaboradorDetalhesComponent implements OnInit {
   }
 
   delete(id) {
-    const swalWithBootstrapButtons = Swal.mixin({
+    const swal = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger line-spacing'
@@ -44,13 +44,13 @@ export class ColaboradorDetalhesComponent implements OnInit {
       buttonsStyling: false
     })
     
-    swalWithBootstrapButtons.fire({
+    swal.fire({
       title: 'Você tem certeza que deseja excluir o colaborador?',
       text: "Esse processo é irreversível!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sim, pode excluir!',
-      cancelButtonText: 'Não, cancela!',
+      cancelButtonText: 'Cancelar',
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
@@ -60,15 +60,13 @@ export class ColaboradorDetalhesComponent implements OnInit {
         }, (err) => {
           console.log(err);
         });
-        swalWithBootstrapButtons.fire(
+        swal.fire(
           'Excluído!',
           'Colaborador excluído com sucesso!',
           'success'
         )
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swal.fire(
           'Cancelado',
           'Operação cancelada conforme solicitado :)',
           'error'

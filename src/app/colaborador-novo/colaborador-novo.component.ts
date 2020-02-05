@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { SetoresService } from '../services/setores.service';
 import { ColaboradoresService } from '../services/colaboradores.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +7,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Setor } from '../models/setor.model';
 import Swal from 'sweetalert2';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-novo-colaborador',
@@ -38,7 +41,7 @@ export class ColaboradorNovoComponent implements OnInit {
   }
 
   addColaborador(form: NgForm) {
-    console.log(form);
+   console.log(form);
     this.colaboradorService.addColaborador(form).subscribe(res => {
         this.route.navigate(['/colaboradores'])
         Swal.fire({
@@ -48,8 +51,15 @@ export class ColaboradorNovoComponent implements OnInit {
           timer: 2500
         })
     }, (err) => {
+      Swal.fire({
+        icon: 'error',
+        title: `${err.error.fieldMessage}`,
+        showConfirmButton: false,
+        timer: 2500
+      })
       console.log(err);
     });
+    
   }
 
 }
