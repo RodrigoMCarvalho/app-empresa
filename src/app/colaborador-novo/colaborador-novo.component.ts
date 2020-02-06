@@ -43,23 +43,31 @@ export class ColaboradorNovoComponent implements OnInit {
   addColaborador(form: NgForm) {
    console.log(form);
     this.colaboradorService.addColaborador(form).subscribe(res => {
-        this.route.navigate(['/colaboradores'])
+        this.mensagemSucesso();
+    }, (err: HttpErrorResponse) => {
+      if ( err.status != 201){
         Swal.fire({
-          icon: 'success',
-          title: 'Colaborador salvo com sucesso!',
+          icon: 'error',
+          title: `${err.error.fieldMessage}`,
           showConfirmButton: false,
           timer: 2500
         })
-    }, (err) => {
-      Swal.fire({
-        icon: 'error',
-        title: `${err.error.fieldMessage}`,
-        showConfirmButton: false,
-        timer: 2500
-      })
-      console.log(err);
+        console.log(err);
+      } else {
+        this.mensagemSucesso();
+      }
     });
     
+  }
+
+  mensagemSucesso() {
+    this.route.navigate(['/colaboradores'])
+    Swal.fire({
+      icon: 'success',
+      title: 'Colaborador salvo com sucesso!',
+      showConfirmButton: false,
+      timer: 2500
+    })
   }
 
 }

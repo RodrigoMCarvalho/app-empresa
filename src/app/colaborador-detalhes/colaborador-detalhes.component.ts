@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ColaboradoresService } from './../services/colaboradores.service';
 import { Colaborador } from './../models/colaborador.model';
 import { Component, OnInit } from '@angular/core';
@@ -56,15 +57,18 @@ export class ColaboradorDetalhesComponent implements OnInit {
       if (result.value) {
         //realiza a exclução do colaborador
         this.colaboradorService.delete(id).subscribe(res => {
-          this.router.navigate(['colaboradores'])
-        }, (err) => {
-          console.log(err);
-        });
-        swal.fire(
-          'Excluído!',
-          'Colaborador excluído com sucesso!',
-          'success'
-        )
+        }, (err: HttpErrorResponse) => {
+          if (err.status != 200) {
+            console.log(err);
+          } else {
+            this.router.navigate(['colaboradores'])
+            swal.fire(
+              'Excluído!',
+              'Colaborador excluído com sucesso!',
+              'success'
+            )
+          }
+        });      
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         swal.fire(
           'Cancelado',
@@ -72,7 +76,7 @@ export class ColaboradorDetalhesComponent implements OnInit {
           'error'
         )
       }
-    })
+    });
     
   }
 }
