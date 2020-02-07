@@ -1,3 +1,4 @@
+import { AppConstants } from './../utils/app-constants';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { SetoresService } from '../services/setores.service';
@@ -45,7 +46,7 @@ export class ColaboradorNovoComponent implements OnInit {
       this.route.navigate(['/colaboradores'])
       Swal.fire({
         icon: 'success',
-        title: 'Colaborador salvo com sucesso!',
+        title: AppConstants.COLABORADOR_SALVO,
         showConfirmButton: false,
         timer: 2500
       })

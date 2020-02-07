@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { AppConstants } from './../utils/app-constants';
 import { ColaboradoresService } from './../services/colaboradores.service';
 import { Colaborador } from './../models/colaborador.model';
 import { Component, OnInit } from '@angular/core';
@@ -45,33 +45,28 @@ export class ColaboradorDetalhesComponent implements OnInit {
     })
     
     swal.fire({
-      title: 'Você tem certeza que deseja excluir o colaborador?',
-      text: "Esse processo é irreversível!",
+      title: AppConstants.CONFIRMAR_EXCLUSAO, 
+      text: AppConstants.MENSAGEM_EXCLUSAO,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim, pode excluir!',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: AppConstants.CONFIRMAR_BOTAO_EXCLUSAO,
+      cancelButtonText: AppConstants.CANCELAR_BOTAO_EXCLUSAO,
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
         //realiza a exclução do colaborador
         this.colaboradorService.delete(id).subscribe(res => {
-        }, (err: HttpErrorResponse) => {
-          if (err.status != 200) {
-            console.log(err);
-          } else {
-            this.router.navigate(['colaboradores'])
-            swal.fire(
-              'Excluído!',
-              'Colaborador excluído com sucesso!',
-              'success'
-            )
-          }
-        });      
+          this.router.navigate(['colaboradores'])
+          swal.fire(
+            AppConstants.EXCLUIDO,
+            AppConstants.COLABORADOR_EXCLUIDO,
+            'success'
+          )
+        }, err => console.error(err));      
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         swal.fire(
-          'Cancelado',
-          'Operação cancelada conforme solicitado :)',
+          AppConstants.CANCELADO,
+          AppConstants.OPERACAO_CANCELADA,
           'error'
         )
       }

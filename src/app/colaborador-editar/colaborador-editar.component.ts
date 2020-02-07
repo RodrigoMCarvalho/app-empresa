@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { map } from 'rxjs/operators';
+import { AppConstants } from '../utils/app-constants';
 
 @Component({
   selector: 'app-colaborador-editar',
@@ -74,7 +74,7 @@ export class ColaboradorEditarComponent implements OnInit {
       this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
         Swal.fire({
           icon: 'success',
-          title: 'Colaborador alterado com sucesso!',
+          title: AppConstants.COLABORADOR_ALTERADO,
           showConfirmButton: false,
           timer: 2500
         })
