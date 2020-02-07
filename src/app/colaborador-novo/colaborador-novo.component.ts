@@ -7,7 +7,6 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Setor } from '../models/setor.model';
 import Swal from 'sweetalert2';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-novo-colaborador',
@@ -43,7 +42,13 @@ export class ColaboradorNovoComponent implements OnInit {
   addColaborador(form: NgForm) {
    console.log(form);
     this.colaboradorService.addColaborador(form).subscribe(res => {
-        this.mensagemSucesso();
+      this.route.navigate(['/colaboradores'])
+      Swal.fire({
+        icon: 'success',
+        title: 'Colaborador salvo com sucesso!',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }, (err: HttpErrorResponse) => {
       if ( err.status != 201){
         Swal.fire({
@@ -53,21 +58,8 @@ export class ColaboradorNovoComponent implements OnInit {
           timer: 2500
         })
         console.log(err);
-      } else {
-        this.mensagemSucesso();
-      }
-    });
-    
-  }
-
-  mensagemSucesso() {
-    this.route.navigate(['/colaboradores'])
-    Swal.fire({
-      icon: 'success',
-      title: 'Colaborador salvo com sucesso!',
-      showConfirmButton: false,
-      timer: 2500
-    })
+      } 
+    }); 
   }
 
 }

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-colaborador-editar',
@@ -54,7 +55,7 @@ export class ColaboradorEditarComponent implements OnInit {
         .subscribe( data => {
           this.colaborador = data
           this.isLoadingResults = false;
-          this.colaboradorEditForm.setValue({
+          this.colaboradorEditForm.patchValue({
             id: data.id,
             nome: data.nome,
             cpf: data.cpf,
@@ -70,7 +71,13 @@ export class ColaboradorEditarComponent implements OnInit {
   updateColaborador(colaborador: Colaborador) {
     console.log(colaborador)
     this.colaboradorService.updateColaborador(colaborador).subscribe( res => {
-      this.mensagemSucesso();
+      this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
+        Swal.fire({
+          icon: 'success',
+          title: 'Colaborador alterado com sucesso!',
+          showConfirmButton: false,
+          timer: 2500
+        })
     }, (err: HttpErrorResponse) => {
       if (err.status != 200) {
         Swal.fire({
@@ -79,25 +86,12 @@ export class ColaboradorEditarComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         })
-      } else {
-        this.mensagemSucesso();
-      console.log(err);
-      }
+      } 
     });
   }
 
   compareSetor(s1: Setor, s2: Setor): boolean {
     return s1 && s2 ? (s1.id === s2.id && s1.descricao === s2.descricao) : s1 === s2;
-  }
-
-  mensagemSucesso() {
-    this.router.navigate([`/colaborador-detalhes/` + this.colaborador.id]);
-        Swal.fire({
-          icon: 'success',
-          title: 'Colaborador alterado com sucesso!',
-          showConfirmButton: false,
-          timer: 2500
-        })
   }
 
 }

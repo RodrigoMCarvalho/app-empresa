@@ -33,7 +33,6 @@ export class ColaboradorDetalhesComponent implements OnInit {
           console.log(this.colaborador);
           this.isLoadingResults = false;
         });
-      console.log(this.colaborador) 
   }
 
   delete(id) {

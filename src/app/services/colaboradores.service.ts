@@ -7,7 +7,7 @@ import { tap, map } from 'rxjs/operators';
 import { environment } from '../environment/environments';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'text' })
 }; 
 
 
@@ -23,7 +23,7 @@ export class ColaboradoresService {
    }
 
   getColaboradores() {
-    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores/all`)
+    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores/all`, httpOptions)
     .pipe(
       tap(_ => console.log(`leu os colaboradores`)),
       );
@@ -51,11 +51,11 @@ export class ColaboradoresService {
   }
 
   addColaborador(colaborador) {
-    return this.http.post<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions);
+    return this.http.post<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
   }
 
   updateColaborador(colaborador) {
-    return this.http.put<Colaborador>(`${this.apiUrl}/colaborador`, colaborador, httpOptions)
+    return this.http.put<Colaborador>(`${this.apiUrl}/colaborador`, colaborador,  httpOptions)
       .pipe(
         tap((colaborador: Colaborador) => console.log(`atualizou o colaborador com w/ id=${colaborador.id}`)),
       );
