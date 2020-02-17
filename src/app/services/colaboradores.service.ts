@@ -1,10 +1,11 @@
+import { environment } from './../../environments/environment';
 import { Colaborador } from './../models/colaborador.model';
 import { ColaboradorPage } from '../models/colaboradorPage.model';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-import { environment } from '../environment/environments';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', responseType: 'text' })
@@ -19,7 +20,7 @@ export class ColaboradoresService {
   apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.apiUrl;
+    this. apiUrl = environment.apiUrl;
    }
 
   getColaboradores() {

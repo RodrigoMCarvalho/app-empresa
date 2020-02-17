@@ -1,9 +1,10 @@
+import { environment } from './../../environments/environment';
 import { Setor } from '../models/setor.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map, take } from 'rxjs/operators';
-import { environment } from '../environment/environments';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'})
@@ -17,7 +18,7 @@ export class SetoresService {
   apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.apiUrl;
+    this. apiUrl = environment.apiUrl;
    }
 
   getSetores() {

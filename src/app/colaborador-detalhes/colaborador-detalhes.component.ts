@@ -54,7 +54,6 @@ export class ColaboradorDetalhesComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        //realiza a exclução do colaborador
         this.colaboradorService.delete(id).subscribe(res => {
           this.router.navigate(['colaboradores'])
           swal.fire(
