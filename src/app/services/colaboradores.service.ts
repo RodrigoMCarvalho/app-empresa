@@ -24,7 +24,7 @@ export class ColaboradoresService {
    }
 
   getColaboradores() {
-    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores/all`, httpOptions)
+    return this.http.get<Colaborador[]>(`${this.apiUrl}/colaboradores`, httpOptions)
     .pipe(
       tap(_ => console.log(`leu os colaboradores`)),
       );
